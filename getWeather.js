@@ -72,12 +72,5 @@ let weatherData = await getWeatherData(getTimelineURL, getTimelineParameters)
     }).then(message => console.log(message.sid))
 })
 
-
-// client.messages
-// .create({
-//     body: message,
-//     from: "+18668285812",
-//     to: '+17814057882'
-// })
-// .then(message => console.log(message.sid));
+//@TODO: send weather data on user request thru text
 
