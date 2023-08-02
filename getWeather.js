@@ -6,6 +6,9 @@ import twilio from 'twilio';
 
 const accountSid = "ACbb34c3f41f7d330761d1143bdea610e3";
 const authToken = "264901e9129ebef5484444d6225af406";
+
+const client = twilio(accountSid, authToken)
+
 // set the Timelines GET endpoint as the target URL
 const getTimelineURL = "https://api.tomorrow.io/v4/timelines";
 
@@ -51,27 +54,30 @@ const getTimelineParameters =  queryString.stringify({
     timezone,
 }, {arrayFormat: "comma"});
 
-fetch(getTimelineURL + "?" + getTimelineParameters, {method: "GET", compress: true})
-  .then((result) => result.json())
-  .then(function(json) {
-    let data = json.data.timelines[0].intervals[0].values
-    let currentTemp = data.temperature
-    let precip = data.precipitationType
-
-    const client = twilio(accountSid, authToken);
-
+async function getWeatherData(getTimelineURL, getTimelineParameters){
+    let response = await fetch(getTimelineURL + "?" + getTimelineParameters, {method: "GET", compress: true})
+    let result = await response.json();
+    let data = await result.data.timelines[0].intervals[0].values
+    let currentTemp = await data.temperature
+    return currentTemp      
+}
+let weatherData = await getWeatherData(getTimelineURL, getTimelineParameters)
+.then(data => {
     client.messages
     .create({
-        body: `It is currently ${currentTemp} degrees out.`,
+        body: `It is ${data} degrees.`,
         from: "+18668285812",
         to: '+17814057882'
-    })
-    .then(message => console.log(message.sid));
 
-    console.log(currentTemp)
-    })
-
-  .catch((err) => console.error("error: " + err));
+    }).then(message => console.log(message.sid))
+})
 
 
-  
+// client.messages
+// .create({
+//     body: message,
+//     from: "+18668285812",
+//     to: '+17814057882'
+// })
+// .then(message => console.log(message.sid));
+
