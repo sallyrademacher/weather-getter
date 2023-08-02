@@ -2,11 +2,12 @@ import fetch from 'node-fetch';
 import queryString from 'query-string';
 import moment from 'moment';
 
+
 // set the Timelines GET endpoint as the target URL
 const getTimelineURL = "https://api.tomorrow.io/v4/timelines";
 
 // get your key from app.tomorrow.io/development/keys
-const apikey = "blcaNlcJOvisvQEAf3idR5GpbBdFc27N";
+const apikey = process.env.TOMORROW_API_KEY;
 const amherst = [42.373222, -72.519852];
 // amherst, ma
 let location = amherst;
@@ -56,3 +57,4 @@ fetch(getTimelineURL + "?" + getTimelineParameters, {method: "GET", compress: tr
     console.log(currentTemp)
     })
   .catch((error) => console.error("error: " + err));
+
