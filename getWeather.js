@@ -4,8 +4,8 @@ import moment from 'moment';
 import 'dotenv/config';
 import twilio from 'twilio';
 
-const accountSid = "ACbb34c3f41f7d330761d1143bdea610e3";
-const authToken = "264901e9129ebef5484444d6225af406";
+const accountSid = process.env.TWILIO_ACCOUNT_SID;
+const authToken = process.env.TWILIO_AUTH_TOKEN;
 
 const client = twilio(accountSid, authToken)
 
@@ -13,7 +13,7 @@ const client = twilio(accountSid, authToken)
 const getTimelineURL = "https://api.tomorrow.io/v4/timelines";
 
 // get your key from app.tomorrow.io/development/keys
-const apikey = "blcaNlcJOvisvQEAf3idR5GpbBdFc27N";
+const apikey = process.env.TOMORROW_API_KEY;
 const amherst = [42.373222, -72.519852];
 // amherst, ma
 let location = amherst;
@@ -66,8 +66,8 @@ let weatherData = await getWeatherData(getTimelineURL, getTimelineParameters)
     client.messages
     .create({
         body: `It is ${data} degrees.`,
-        from: "+18668285812",
-        to: '+17814057882'
+        from: process.env.TWILIO_PHONE_NUMBER,
+        to: process.env.MY_PHONE_NUMBER
 
     }).then(message => console.log(message.sid))
 })
