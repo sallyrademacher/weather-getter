@@ -3,8 +3,10 @@ import path from 'path';
 import {fileURLToPath } from 'url';
 import bodyParser from 'body-parser';
 
+import * as getWeatherModule from './getWeather.js';
+
 import twilio from 'twilio';
-import './getWeather.js';
+
 
 const { MessagingResponse } = twilio.twiml;
 
@@ -29,7 +31,7 @@ app.post('/', async function(req, res){
 
         const twiml = new MessagingResponse();
 
-        let weatherData = await getWeatherData(getTimelineURL, getTimelineParameters)
+        let weatherData = await getWeatherModule.getWeatherData(getTimelineURL, getTimelineParameters)
 .then(data => {
 
             twiml.message(`It is ${data} degrees out.`)

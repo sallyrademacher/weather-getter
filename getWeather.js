@@ -61,6 +61,7 @@ async function getWeatherData(getTimelineURL, getTimelineParameters){
     let currentTemp = await data.temperature
     return currentTemp      
 }
+
 let weatherData = await getWeatherData(getTimelineURL, getTimelineParameters)
 .then(data => {
     client.messages
