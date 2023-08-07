@@ -2,7 +2,7 @@
   "name": "weather-getter",
   "version": "1.0.0",
   "description": "",
-  "main": "getWeather.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -13,8 +13,10 @@
     "express": "^4.18.2",
     "moment": "^2.29.4",
     "node-fetch": "^3.3.2",
+    "path": "^0.12.7",
     "query-string": "^8.1.0",
-    "twilio": "^4.14.1"
+    "twilio": "^4.14.1",
+    "url": "^0.11.1"
   },
   "type": "module"
 }
