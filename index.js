@@ -36,6 +36,8 @@ app.post('/', async function(req, res){
 
             twiml.message(`It is ${data} degrees out.`)
             res.type('text/xml').send(twiml.toString());
+        }).catch(error => {
+            console.log("trouble!")
         })
 
         
